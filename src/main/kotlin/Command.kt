@@ -30,7 +30,7 @@ abstract class Command(val stream: Stream, val input: Stream, protected val tail
      * Parsing [input] into format, applicable for [arguments]
      */
     protected fun parseArguments(argument: Stream?): List<Argument> =
-            argument?.text?.split(Regex(""""((\$[\w,\.!\$]*) | ("[\w,\.!\$ ]*"))/gx"""))?.map { Argument(it) } ?: listOf()
+            argument?.text?.split(Regex(""""((\$[\w,\.!\$\n\s ]*) | ("[\w,\.!\$\n\s ]*"))/gx"""))?.map { Argument(it) } ?: listOf()
 
 
     companion object {
@@ -47,6 +47,7 @@ abstract class Command(val stream: Stream, val input: Stream, protected val tail
                 "echo" -> Echo(stream, Stream(input), tail!!)
                 "pwd" -> Pwd(stream, Stream(input), tail!!)
                 "cat" -> Cat(stream, Stream(input), tail!!)
+                "grep" -> Grep(stream, Stream(input), tail!!)
                 "exit" -> Exit(stream, Stream(input), tail!!)
                 else -> {
                     if (command?.contains('=') ?: false) {
