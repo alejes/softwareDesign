@@ -7,7 +7,7 @@ class Argument(val cmd: String) {
             when {
                 cmd.startsWith('$') -> VariableManager[cmd.removePrefix("$")] ?: cmd
                 else -> {
-                    val parsing = Regex("""(([\w\.!,\$ ])+)|("[\w,\.!\$ ]*")""").find(cmd)?.value?.trim()?.removeSurrounding("\"", "\"")?.toString().orEmpty()
+                    val parsing = Regex("""(([\w\.!,\$\n\s ])+)|("[\w,\.!\$\n\s ]*")""").find(cmd)?.value?.trim()?.removeSurrounding("\"", "\"")?.toString().orEmpty()
                     when {
                         cmd.startsWith('"') -> substituteVariables(parsing)
                         else -> parsing
