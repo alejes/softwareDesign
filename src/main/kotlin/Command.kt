@@ -48,6 +48,8 @@ abstract class Command(val stream: Stream, val input: Stream, protected val tail
                 "pwd" -> Pwd(stream, Stream(input), tail!!)
                 "cat" -> Cat(stream, Stream(input), tail!!)
                 "exit" -> Exit(stream, Stream(input), tail!!)
+                "ls" -> Ls(stream, Stream(input), tail!!)
+                "cd" -> Cd(stream, Stream(input), tail!!)
                 else -> {
                     if (command?.contains('=') ?: false) {
                         Assignment(
