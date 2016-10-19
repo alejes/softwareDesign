@@ -4,6 +4,10 @@ import Command
 import Stream
 import java.io.File
 
+/**
+ * List directory
+ *  @see Command
+ */
 class Ls(stream: Stream, input: Stream, tail: String) : Command(stream, input, tail) {
     override val name = "ls"
     override val isNative = true

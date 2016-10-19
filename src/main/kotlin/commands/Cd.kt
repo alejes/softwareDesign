@@ -5,6 +5,10 @@ import Stream
 import java.io.File
 import java.nio.file.Paths
 
+/**
+ * Change directory
+ * @see Command
+ */
 class Cd(stream: Stream, input: Stream, tail: String) : Command(stream, input, tail) {
     override val name = "cd"
     override val isNative = true
