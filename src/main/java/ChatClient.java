@@ -1,6 +1,8 @@
+import org.jetbrains.annotations.Nullable;
 import queries.GetStatusQuery;
 import queries.QueriesBuilder;
 import queries.QueryType;
+import queries.SendMessageQuery;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -60,4 +62,18 @@ public class ChatClient {
         }
     }
 
+    public void sendMessage(int port, @Nullable String message) {
+        if (message != null) {
+            try (Socket socket = new Socket()) {
+                socket.connect(new InetSocketAddress("127.0.0.1", port), 5000);
+                SendMessageQuery q = (SendMessageQuery) QueriesBuilder.build(QueryType.SEND_MESSAGE);
+                try (DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
+                    dos.writeUTF(q.genQuery(message, userData));
+                }
+            } catch (IOException e) {
+                Logger log = Logger.getLogger(ChatClient.class.getName());
+                log.log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+    }
 }

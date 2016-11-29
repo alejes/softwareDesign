@@ -9,10 +9,8 @@ public class ChatServer {
     private final ServerSocket socket;
     private final Logger log;
     private int myPort;
-    private final ChatUserData userData;
 
     public ChatServer(ChatUserData userData) throws IOException {
-        this.userData = userData;
         log = Logger.getLogger(ChatServer.class.getName());
         try {
             socket = new ServerSocket(0);

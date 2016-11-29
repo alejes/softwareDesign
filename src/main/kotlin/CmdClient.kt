@@ -17,6 +17,7 @@ class CmdClient {
                         "setStatus %text - set your status\n" +
                         "getStatus - get your current status\n" +
                         "getStatusOf %port - get current status of user on port %port\n" +
+                        "sendMessageTo %port %text - send message %text to user on %port\n" +
                         "exit - exit from this application\n" +
                         "")
                 "getPort" -> println("Your port is ${client.port}")
@@ -39,6 +40,12 @@ class CmdClient {
                     val status = client.requestStatus(port)
                     println("Status of ${port} is ${status}")
                 }
+                "sendMessageTo" -> {
+                    val port = input.nextInt()
+                    val message = input.nextLine()
+                    client.sendMessage(port,message)
+                }
+                else -> println("unknown command")
             }
         }
     }
