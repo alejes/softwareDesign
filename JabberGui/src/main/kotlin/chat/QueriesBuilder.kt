@@ -1,0 +1,30 @@
+package chat
+
+import com.github.salomonbrys.kotson.fromJson
+import com.github.salomonbrys.kotson.jsonObject
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+
+enum class QueryType() {
+    GET_STATUS,
+    GET_NAME,
+    SEND_MESSAGE
+}
+
+abstract class Query {}
+
+object QueriesBuilder {
+    @JvmStatic
+    fun build(q: QueryType): Query =
+            when (q) {
+                QueryType.GET_STATUS -> GetStatusQuery()
+                QueryType.GET_NAME -> GetNameQuery()
+                QueryType.SEND_MESSAGE -> SendMessageQuery()
+            }
+}
+
+
+
+
+
+
