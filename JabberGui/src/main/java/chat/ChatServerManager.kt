@@ -1,6 +1,6 @@
 package chat
 
-import chat.ResponseBuilder
+import chat.reponses.ResponseBuilder
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.IOException

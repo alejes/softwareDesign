@@ -1,11 +1,16 @@
 package sample;
 
 import chat.ChatClient;
+import chat.ChatMessage;
 import chat.ChatServer;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.jnlp.IntegrationService;
 import java.io.IOException;
@@ -14,8 +19,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 public class Controller implements Initializable {
     private final ChatClient client;
+    private final Object polygonWriter = new Object();
     @FXML
     private TextField usernameText;
     @FXML
@@ -23,12 +31,18 @@ public class Controller implements Initializable {
     @FXML
     private TextField portText;
     @FXML
-    private TextField sendText;
+    private TextField messageText;
+    @FXML
+    private TextField targetPort;
     @FXML
     private TextArea polygon;
 
+    private Thread mr;
+
+    private Logger log;
+
     public Controller() throws IOException {
-        Logger log = Logger.getLogger(ChatServer.class.getName());
+        log = Logger.getLogger(ChatServer.class.getName());
         try {
             client = new ChatClient();
         } catch (IOException e) {
@@ -48,14 +62,58 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void commandSendButtonClicked() {
-        String request = sendText.getCharacters().toString();
-        QueryProcessor.processQuery(client, request, polygon);
+    public void messageSendButtonClicked() {
+        String message = messageText.getCharacters().toString();
+        Integer port = Integer.parseInt(targetPort.getCharacters().toString());
+        client.sendMessage(port, message);
+        synchronized (polygonWriter) {
+            polygon.setText("Message From [YOU] to " + port.toString() + ": " + message + "\n" + polygon.getText());
+        }
+    }
+
+    @FXML
+    public void statusGetButtonClicked() {
+        Integer port = Integer.parseInt(targetPort.getCharacters().toString());
+        String status = client.requestStatus(port);
+        synchronized (polygonWriter) {
+            polygon.setText("Status of " + port.toString() + " is " + status + "\n" + polygon.getText());
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Integer port = client.getPort();
         portText.setText(port.toString());
+        MessageReader messageReader = new MessageReader();
+        mr = new Thread(messageReader);
+        mr.start();
+    }
+
+    public void setupScene(Stage stage) {
+        stage.setOnCloseRequest(we -> {
+            mr.interrupt();
+            Platform.exit();
+            System.exit(0);
+        });
+    }
+
+    private class MessageReader implements Runnable {
+
+        @Override
+        public void run() {
+            ChatMessage mes;
+            synchronized (client.messages()) {
+                while (!Thread.interrupted()) {
+                    while ((mes = client.messages().poll()) != null) {
+                        polygon.setText("Message From [" + mes.getAuthor() + ":" + mes.getPort() + "] to [YOU]: " + mes.getMessage() + "\n" + polygon.getText());
+                    }
+                    try {
+                        client.messages().wait();
+                    } catch (InterruptedException e) {
+                        log.finer("Interrupt in message reader: " + e.getMessage());
+                    }
+                }
+            }
+        }
     }
 }

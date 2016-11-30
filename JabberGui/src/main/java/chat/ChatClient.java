@@ -1,5 +1,9 @@
 package chat;
 
+import chat.queries.GetStatusQuery;
+import chat.queries.QueriesBuilder;
+import chat.queries.QueryType;
+import chat.queries.SendMessageQuery;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.DataInputStream;
@@ -7,6 +11,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +24,7 @@ public class ChatClient {
     public ChatClient() throws IOException {
         userData = new ChatUserData();
         server = new ChatServer(userData);
+        userData.port = server.getMyPort();
     }
 
     public String getName() {
@@ -43,8 +51,11 @@ public class ChatClient {
         server.stopServer();
     }
 
+    public Queue<ChatMessage> messages() {
+        return userData.messages;
+    }
 
-    String requestStatus(int port) {
+    public String requestStatus(int port) {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress("127.0.0.1", port), 5000);
             GetStatusQuery q = (GetStatusQuery) QueriesBuilder.build(QueryType.GET_STATUS);

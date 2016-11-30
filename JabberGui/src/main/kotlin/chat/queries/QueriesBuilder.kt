@@ -1,9 +1,6 @@
-package chat
+package chat.queries
 
-import com.github.salomonbrys.kotson.fromJson
-import com.github.salomonbrys.kotson.jsonObject
-import com.google.gson.Gson
-import com.google.gson.JsonObject
+import chat.GetNameQuery
 
 enum class QueryType() {
     GET_STATUS,
@@ -11,7 +8,7 @@ enum class QueryType() {
     SEND_MESSAGE
 }
 
-abstract class Query {}
+abstract class Query
 
 object QueriesBuilder {
     @JvmStatic

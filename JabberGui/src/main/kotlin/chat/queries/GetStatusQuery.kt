@@ -1,5 +1,6 @@
-package chat
+package chat.queries
 
+import chat.queries.Query
 import com.github.salomonbrys.kotson.fromJson
 import com.github.salomonbrys.kotson.jsonObject
 import com.google.gson.Gson

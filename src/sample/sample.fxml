@@ -18,14 +18,14 @@
    <top>
       <HBox prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#usernameSavedButtonClicked" prefHeight="33.0" prefWidth="303.0" text="Save ">
+            <Button mnemonicParsing="false" onAction="#usernameSavedButtonClicked" prefHeight="33.0" prefWidth="418.0" text="Save ">
                <graphic>
-                  <TextField fx:id="usernameText" prefHeight="25.0" prefWidth="220.0" promptText="Username" />
+                  <TextField fx:id="usernameText" prefHeight="25.0" prefWidth="270.0" promptText="Username" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false"  onAction="#statusSavedButtonClicked" prefHeight="33.0" prefWidth="299.0" text="Save ">
+            <Button mnemonicParsing="false" onAction="#statusSavedButtonClicked" prefHeight="33.0" prefWidth="401.0" text="Save ">
                <graphic>
-                  <TextField prefHeight="25.0"  fx:id="statusText" prefWidth="232.0" promptText="Status" />
+                  <TextField fx:id="statusText" prefHeight="25.0" prefWidth="291.0" promptText="Status" />
                </graphic>
             </Button>
          </children>
@@ -35,22 +35,28 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your port:" wrappingWidth="59.13671875" />
-            <TextField editable="false" fx:id="portText"  promptText="port" />
+            <TextField fx:id="portText" editable="false" promptText="port" />
          </items>
       </ToolBar>
    </bottom>
-   <left>
-      <TextArea editable="false" prefHeight="457.0" prefWidth="295.0" text="getStatusOf %port - get status of user on port %port&#10;sendMessageTo %port %text - send message " BorderPane.alignment="CENTER" />
-   </left>
    <right>
-      <VBox prefHeight="457.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="457.0" prefWidth="803.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#commandSendButtonClicked" prefHeight="33.0" prefWidth="503.0" text="Send">
-               <graphic>
-                  <TextField fx:id="sendText" prefHeight="25.0" prefWidth="428.0" promptText="Command" />
-               </graphic>
-            </Button>
-            <TextArea editable="false" fx:id="polygon" prefHeight="438.0" prefWidth="500.0" />
+            <HBox prefHeight="44.0" prefWidth="801.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#statusGetButtonClicked" prefHeight="33.0" prefWidth="232.0" text="Status">
+                     <graphic>
+                        <TextField fx:id="targetPort" prefHeight="25.0" prefWidth="91.0" promptText="port" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#messageSendButtonClicked" prefHeight="33.0" prefWidth="718.0" text="Send">
+                     <graphic>
+                        <TextField fx:id="messageText" prefHeight="25.0" prefWidth="546.0" promptText="message" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea fx:id="polygon" editable="false" prefHeight="434.0" prefWidth="801.0" />
          </children>
       </VBox>
    </right>

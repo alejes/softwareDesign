@@ -1,5 +1,6 @@
-package chat
+package chat.reponses
 
+import chat.ChatMessage
 import chat.ChatUserData
 import com.github.salomonbrys.kotson.fromJson
 import com.github.salomonbrys.kotson.jsonObject
@@ -27,7 +28,12 @@ object ResponseBuilder {
                 ).toString()
             }
             "sendMessage" -> {
-                println((response["name"] ?: "[noname]") + " write: " + (response["text"] ?: "[empty message]"))
+                val message = ChatMessage(response["port"]?.toInt() ?: 0, response["name"] ?: "[noname]", (response["text"] ?: "[empty message]"))
+                synchronized(cud.messages) {
+                    cud.messages.add(message)
+                    (cud.messages as java.lang.Object).notifyAll()
+                }
+                println(message.author + " write: " + message.message)
                 return object : Response {
                     override fun generateAnswer() = jsonObject(
                             "result" to "ok"

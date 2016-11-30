@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JabberGui.iml" filepath="$PROJECT_DIR$/.idea/modules/JabberGui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JabberGui_main.iml" filepath="$PROJECT_DIR$/.idea/modules/JabberGui_main.iml" group="JabberGui" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JabberGui_test.iml" filepath="$PROJECT_DIR$/.idea/modules/JabberGui_test.iml" group="JabberGui" />
+      <module fileurl="file://$PROJECT_DIR$/sdGUIJabber.iml" filepath="$PROJECT_DIR$/sdGUIJabber.iml" />
+    </modules>
+  </component>
+</project>

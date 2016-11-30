@@ -1,5 +1,5 @@
 import chat.CmdClient
-import chat.GetStatusQuery
+import chat.queries.GetStatusQuery
 import java.util.*
 import java.util.logging.Logger
 
