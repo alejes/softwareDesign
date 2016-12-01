@@ -7,6 +7,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 
 
+/**
+ * Get name of another user
+ */
+
 class GetNameQuery : Query() {
     fun genQuery(): String {
         val obj: JsonObject = jsonObject(

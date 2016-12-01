@@ -9,6 +9,10 @@ import java.net.SocketException
 import java.util.logging.Level
 import java.util.logging.Logger
 
+/**
+ * Manager of chat server
+ * @see ChatServer
+ */
 class ChatServerManager(private val server: ServerSocket, private val cud: ChatUserData) : Runnable {
     private val log: Logger
 

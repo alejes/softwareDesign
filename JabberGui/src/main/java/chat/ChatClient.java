@@ -11,11 +11,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+/**
+ * Class for manage data of chat client
+ */
 
 public class ChatClient {
     private final ChatServer server;
@@ -51,6 +53,11 @@ public class ChatClient {
         server.stopServer();
     }
 
+    /**
+     * Queue for pending incoming messages
+     *
+     * @return message queue
+     */
     public Queue<ChatMessage> messages() {
         return userData.messages;
     }

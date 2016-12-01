@@ -1,8 +1,10 @@
 package chat
 
-import chat.ChatClient
 import java.util.*
 
+/**
+ * Command line client for chat
+ */
 class CmdClient {
     val input = Scanner(System.`in`)
     val client = ChatClient()

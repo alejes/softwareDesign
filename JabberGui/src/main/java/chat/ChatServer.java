@@ -5,6 +5,10 @@ import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Server for answer to incoming messages
+ */
+
 public class ChatServer {
     private final Thread managerThread;
     private final ServerSocket socket;

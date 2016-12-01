@@ -3,7 +3,10 @@ package chat.queries
 import com.github.salomonbrys.kotson.jsonObject
 import com.google.gson.JsonObject
 import chat.ChatUserData
-import chat.queries.Query
+
+/**
+ * Send message to another user
+ */
 
 class SendMessageQuery : Query() {
     fun genQuery(mes : String, cud: ChatUserData): String {

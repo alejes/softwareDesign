@@ -10,6 +10,10 @@ interface Response {
     fun generateAnswer(): String
 }
 
+/**
+ * Build response to another user
+ */
+
 object ResponseBuilder {
     @JvmStatic
     fun build(q: String, cud: ChatUserData): Response {

@@ -10,6 +10,9 @@ enum class QueryType() {
 
 abstract class Query
 
+/**
+ * Build query for another chat user
+ */
 object QueriesBuilder {
     @JvmStatic
     fun build(q: QueryType): Query =

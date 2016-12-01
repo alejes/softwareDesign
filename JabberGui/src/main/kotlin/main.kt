@@ -1,8 +1,10 @@
 import chat.CmdClient
-import chat.queries.GetStatusQuery
-import java.util.*
-import java.util.logging.Logger
 
+/**
+ * Entry point for command line chat
+ * For GUI
+ * @see Main
+ */
 fun main(args: Array<String>) {
     println("Hello in our chat")
     val cmd = CmdClient()

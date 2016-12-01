@@ -4,23 +4,22 @@ import chat.ChatClient;
 import chat.ChatMessage;
 import chat.ChatServer;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-import javax.jnlp.IntegrationService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
+/**
+ * Controller for GUI client
+ */
 public class Controller implements Initializable {
     private final ChatClient client;
     private final Object polygonWriter = new Object();
