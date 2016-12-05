@@ -44,14 +44,19 @@
          <children>
             <HBox prefHeight="44.0" prefWidth="801.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#statusGetButtonClicked" prefHeight="33.0" prefWidth="232.0" text="Status">
+                  <Button mnemonicParsing="false" onAction="#statusGetButtonClicked" prefHeight="33.0" prefWidth="232.0">
+                     <graphic>
+                        <TextField fx:id="targetIp" prefHeight="25.0" prefWidth="560.0" promptText="ip" text="127.0.0.1" />
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#statusGetButtonClicked" prefHeight="33.0" prefWidth="174.0" text="Status">
                      <graphic>
                         <TextField fx:id="targetPort" prefHeight="25.0" prefWidth="91.0" promptText="port" />
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#messageSendButtonClicked" prefHeight="33.0" prefWidth="718.0" text="Send">
+                  <Button mnemonicParsing="false" onAction="#messageSendButtonClicked" prefHeight="33.0" prefWidth="395.0" text="Send">
                      <graphic>
-                        <TextField fx:id="messageText" prefHeight="25.0" prefWidth="546.0" promptText="message" />
+                        <TextField fx:id="messageText" prefHeight="25.0" prefWidth="258.0" promptText="message" />
                      </graphic>
                   </Button>
                </children>

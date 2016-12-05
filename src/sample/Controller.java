@@ -34,6 +34,8 @@ public class Controller implements Initializable {
     @FXML
     private TextField targetPort;
     @FXML
+    private TextField targetIp;
+    @FXML
     private TextArea polygon;
 
     private Thread mr;
@@ -63,8 +65,9 @@ public class Controller implements Initializable {
     @FXML
     public void messageSendButtonClicked() {
         String message = messageText.getCharacters().toString();
+        String ip = targetIp.getCharacters().toString();
         Integer port = Integer.parseInt(targetPort.getCharacters().toString());
-        client.sendMessage(port, message);
+        client.sendMessage(ip, port, message);
         synchronized (polygonWriter) {
             polygon.setText("Message From [YOU] to " + port.toString() + ": " + message + "\n" + polygon.getText());
         }
@@ -73,7 +76,8 @@ public class Controller implements Initializable {
     @FXML
     public void statusGetButtonClicked() {
         Integer port = Integer.parseInt(targetPort.getCharacters().toString());
-        String status = client.requestStatus(port);
+        String ip = targetIp.getCharacters().toString();
+        String status = client.requestStatus(ip, port);
         synchronized (polygonWriter) {
             polygon.setText("Status of " + port.toString() + " is " + status + "\n" + polygon.getText());
         }

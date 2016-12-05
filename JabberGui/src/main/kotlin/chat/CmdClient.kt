@@ -41,13 +41,13 @@ class CmdClient {
                 "getStatus" -> println("Your status is ${client.status}")
                 "getStatusOf" -> {
                     val port = input.nextInt()
-                    val status = client.requestStatus(port)
+                    val status = client.requestStatus("127.0.0.1", port)
                     println("Status of ${port} is ${status}")
                 }
                 "sendMessageTo" -> {
                     val port = input.nextInt()
                     val message = input.nextLine()
-                    client.sendMessage(port,message)
+                    client.sendMessage("127.0.0.1", port,message)
                 }
                 else -> println("unknown command")
             }

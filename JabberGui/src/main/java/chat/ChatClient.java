@@ -62,9 +62,9 @@ public class ChatClient {
         return userData.messages;
     }
 
-    public String requestStatus(int port) {
+    public String requestStatus(String hostname, int port) {
         try (Socket socket = new Socket()) {
-            socket.connect(new InetSocketAddress("127.0.0.1", port), 5000);
+            socket.connect(new InetSocketAddress(hostname, port), 5000);
             GetStatusQuery q = (GetStatusQuery) QueriesBuilder.build(QueryType.GET_STATUS);
             try (DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
                  DataInputStream dis = new DataInputStream(socket.getInputStream())) {
@@ -78,10 +78,10 @@ public class ChatClient {
         }
     }
 
-    public void sendMessage(int port, @Nullable String message) {
+    public void sendMessage(String hostname, int port, @Nullable String message) {
         if (message != null) {
             try (Socket socket = new Socket()) {
-                socket.connect(new InetSocketAddress("127.0.0.1", port), 5000);
+                socket.connect(new InetSocketAddress(hostname, port), 5000);
                 SendMessageQuery q = (SendMessageQuery) QueriesBuilder.build(QueryType.SEND_MESSAGE);
                 try (DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
                     dos.writeUTF(q.genQuery(message, userData));
