@@ -1,4 +1,4 @@
-class Argument(val cmd: String) {
+data class Argument(val cmd: String) {
 
     /**
      * @return the fill argument to the current values of the environment

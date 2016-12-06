@@ -1,52 +1,8 @@
 package commands
 
-import com.jshmrsn.karg.Arguments
-import com.jshmrsn.karg.RawArguments
 import Command
 import Stream
-import max
 import min
-import java.io.File
-
-
-/**
- * The class represents settings for parsing the arguments of grep command.
- */
-
-class GrepArguments(raw: RawArguments) : Arguments(raw, name = "default") {
-    val ignoreCase = optionalFlag(
-            name = "ignore-case",
-            description = "Ignore case distinctions, so that characters that differ only in case match each other. ",
-            shortNames = listOf('i'),
-            default = false
-    )
-
-    val wordRegexp = optionalFlag(
-            name = "word-regexp",
-            description = "Select only those lines containing matches that form whole words. " +
-                    "The test is that the matching substring must either be at the beginning of the line, " +
-                    "or preceded by a non-word constituent character. " +
-                    "Similarly, it must be either at the end of the line or " +
-                    "followed by a non-word constituent character. " +
-                    "Word-constituent characters are letters, digits, and the underscore.",
-            shortNames = listOf('w'),
-            default = false
-    )
-
-    val afterContext = optionalParameter(
-            name = "after-context",
-            description = "Print specific lines of trailing  context  after  matching  lines.",
-            default = "0",
-            shortNames = listOf('A')
-    )
-
-    val regexp = positionalArguments(
-            name = "regexp",
-            description = "Use this as the pattern.",
-            minCount = 1,
-            maxCount = 1
-    )
-}
 
 /**
  *  view of native grep command
@@ -69,7 +25,7 @@ class Grep(stream: Stream, input: Stream, tail: String) : Command(stream, input,
     }
 
     override fun execute(): Command {
-        val arguments = com.jshmrsn.karg.parseArguments(input.text.orEmpty().split(' ').filter { it.isNotBlank() }, ::GrepArguments)
+        val arguments: GrepArguments = com.jshmrsn.karg.parseArguments(input.text.orEmpty().split(' ').filter { it.isNotBlank() }, ::GrepArguments)
         val options = mutableSetOf<RegexOption>();
         if (arguments.ignoreCase) {
             options.add(RegexOption.IGNORE_CASE)
@@ -98,7 +54,7 @@ class Grep(stream: Stream, input: Stream, tail: String) : Command(stream, input,
                 lastPosition += lines[lastLine].length
                 lastLine++
             }
-            if (builtString.length > 0) {
+            if (builtString.isNotEmpty()) {
                 builtString.appendln("=============")
             }
             builtString.appendln(getLines(lines, currentLine, min(lastLine + arguments.afterContext.toInt(), lines.size)))
