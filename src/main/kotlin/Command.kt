@@ -30,7 +30,7 @@ abstract class Command(val stream: Stream, val input: Stream, protected val tail
      * Parsing [input] into format, applicable for [arguments]
      */
     protected fun parseArguments(argument: Stream?): List<Argument> =
-            argument?.text?.split(Regex(""""((\$[\w,\.!\$\n\s ]*) | ("[\w,\.!\$\n\s ]*"))/gx"""))?.map { Argument(it) } ?: listOf()
+            argument?.text?.split(Regex(""""((\$[\w,\.!\$\n\s ]*) | ("[\w,\.!\$\n\s ]*"))/gx"""))?.map(::Argument) ?: listOf()
 
 
     companion object {

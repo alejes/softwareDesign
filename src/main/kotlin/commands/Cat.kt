@@ -14,10 +14,10 @@ class Cat(stream: Stream, input: Stream, tail: String) : Command(stream, input, 
     override val isNative = true
 
     override fun execute(): Command {
-        var sources: List<String> = arguments.map { it.eval() }.filter { it.isNotEmpty() }
+        var sources: List<String> = arguments.map { it.eval() }.filter(String::isNotEmpty)
         if (sources.isEmpty()) sources = listOf(stream.toString())
 
-        val newStream = Stream(sources.map { File(it) }
+        val newStream = Stream(sources.map(::File)
                 .map { it.readLines().joinToString(separator = "\n") }
                 .joinToString(separator = " "))
         return Command.parseCommand(newStream, tail)

@@ -1,5 +1,4 @@
 import commands.*
-import org.junit.Assert.*
 import org.junit.Test
 
 class CommandTest {

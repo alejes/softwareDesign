@@ -17,7 +17,7 @@ class Grep(stream: Stream, input: Stream, tail: String) : Command(stream, input,
      * To print the lines from [lines]  starting with [from] and up to [to]
      */
     private fun getLines(lines: List<String>, from: Int, to: Int): StringBuilder {
-        val build = StringBuilder();
+        val build = StringBuilder()
         for (i in from - 1..to - 1) {
             build.appendln(lines[i])
         }
@@ -25,8 +25,8 @@ class Grep(stream: Stream, input: Stream, tail: String) : Command(stream, input,
     }
 
     override fun execute(): Command {
-        val arguments: GrepArguments = com.jshmrsn.karg.parseArguments(input.text.orEmpty().split(' ').filter { it.isNotBlank() }, ::GrepArguments)
-        val options = mutableSetOf<RegexOption>();
+        val arguments: GrepArguments = com.jshmrsn.karg.parseArguments(input.text.orEmpty().split(' ').filter(String::isNotBlank), ::GrepArguments)
+        val options = mutableSetOf<RegexOption>()
         if (arguments.ignoreCase) {
             options.add(RegexOption.IGNORE_CASE)
         }
