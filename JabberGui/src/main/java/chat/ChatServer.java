@@ -29,10 +29,16 @@ public class ChatServer {
         }
     }
 
+    /**
+     * @return port that listen by this client
+     */
     public int getMyPort() {
         return myPort;
     }
 
+    /**
+     * start stopping server
+     */
     public void stopServer() {
         try {
             socket.close();

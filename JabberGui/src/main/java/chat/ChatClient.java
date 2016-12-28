@@ -62,6 +62,9 @@ public class ChatClient {
         return userData.messages;
     }
 
+    /**
+     * @return status for user on hostname and port
+     */
     public String requestStatus(String hostname, int port) {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(hostname, port), 5000);
@@ -78,6 +81,9 @@ public class ChatClient {
         }
     }
 
+    /**
+     * send message to user on hostname and port
+     */
     public void sendMessage(String hostname, int port, @Nullable String message) {
         if (message != null) {
             try (Socket socket = new Socket()) {

@@ -5,10 +5,13 @@ import com.google.gson.JsonObject
 import chat.ChatUserData
 
 /**
- * Send message to another user
+ * query for send message to another user
  */
 
 class SendMessageQuery : Query() {
+    /**
+     * generate string representation of send message query
+     */
     fun genQuery(mes : String, cud: ChatUserData): String {
         val obj: JsonObject = jsonObject(
                 "type" to "sendMessage",

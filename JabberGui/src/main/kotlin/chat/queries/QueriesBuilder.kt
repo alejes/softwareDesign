@@ -1,7 +1,8 @@
 package chat.queries
 
-import chat.GetNameQuery
-
+/**
+ * supported types of queries
+ */
 enum class QueryType() {
     GET_STATUS,
     GET_NAME,

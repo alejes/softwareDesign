@@ -15,6 +15,9 @@ interface Response {
  */
 
 object ResponseBuilder {
+    /**
+     * build response for query with string representation in q
+     */
     @JvmStatic
     fun build(q: String, cud: ChatUserData): Response {
         val gson = Gson()

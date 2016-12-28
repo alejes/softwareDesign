@@ -6,10 +6,13 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 
 /**
- * Get status of another user
+ * query for receive status of another user
  */
 
 class GetStatusQuery : Query() {
+    /**
+     * generate string representation of status request query
+     */
     fun genQuery(): String {
         val obj: JsonObject = jsonObject(
                 "type" to "getStatus"
@@ -17,6 +20,9 @@ class GetStatusQuery : Query() {
         return obj.toString()
     }
 
+    /**
+     * parse status from string representation of query
+     */
     fun resolveQuery(str: String): String {
         val gson = Gson()
         val response = gson.fromJson<Map<String, String>>(str)
